@@ -37,7 +37,7 @@ class AddNew extends Component{
               return response.json();
           });
 
-        let showLI = `<li>the name is ${this.state.name} and the comment is: ${this.state.comment}</li>`
+        let showLI = `<li>name: ${this.state.name},  comment: ${this.state.comment}</li>`
         let theUL = window.document.querySelector(".theList")
         theUL.insertAdjacentHTML("afterend", showLI )
         this.setState({
