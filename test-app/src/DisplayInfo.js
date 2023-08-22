@@ -25,7 +25,7 @@ class DisplayInfo extends Component{
                 const listObj = stArray.map((anything) => {
                     let theName = anything.name;
                     let theComment = anything.comment;
-                    let theLI = `<li key={theName.toString()}>the name is ${theName} and the comment is: ${theComment}</li>`
+                    let theLI = `<li key={theName.toString()}>name: ${theName}, comment: ${theComment}</li>`
                     const theUL = window.document.querySelector('.theList')
                     theUL.insertAdjacentHTML('afterend', theLI)
                 })
