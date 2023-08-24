@@ -88,3 +88,55 @@ appBE.get('/get', (req, res) => {
       });
 
 })
+
+
+
+//express session and cookie parser have not been used yet
+
+
+  appBE.post('/auth', function(req, res) {
+	// Capture the input fields
+	let username = req.body.username;
+	let password = req.body.password;
+   
+	// Ensure the input fields exists and are not empty
+    console.log(username + ', ' + password)
+    res.send({
+        "message": "this is working",
+    })
+    
+    if (username && password) {
+
+        // db connection
+        const connection = mysql.createConnection({
+            host: '127.0.0.1',
+            user: 'root',
+            password: 'password',
+            database: 'userComment'
+        });
+
+
+        connection.connect(function(err) {
+            if (err) throw err;
+            console.log("Connected!");
+            let sql = 'SELECT * FROM userComment.accounts WHERE username = "' + username + '" AND password = "' + password +'"'
+            console.log(sql)
+            connection.query(sql, [username, password], function (err, result, fields) {
+              if (err) throw err;
+
+              if(result.length > 0) {
+                // req.session.loggedin = true;
+                // req.session.username = username;
+                console.log(result)
+                console.log(req.session)
+                //res.redirect('/home')
+              }else{
+                // res.send('Incorrrect un and/or pw')
+                console.log('wrong pw')
+              }
+              res.end();
+            });
+          });
+
+	} 
+});

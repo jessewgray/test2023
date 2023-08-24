@@ -1,14 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import AddNew from './AddNew.js'
-import DisplayInfo from './DisplayInfo';
+import Home from './pages/Home'
+import Login from './pages/Login'
+
+
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-      <p>front end main</p>
-      <AddNew />
-      <DisplayInfo />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

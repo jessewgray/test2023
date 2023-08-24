@@ -31,8 +31,6 @@ class DisplayInfo extends Component{
                 })
             }
             
-           
-          
 
         return(
             <div>
