@@ -1,5 +1,6 @@
-const express = require('express')
-const appBE = express()
+const express = require('express');
+const appBE = express();
+const sessions = require('express-session');
 
 //accepting post data
 const bodyParser = require('body-parser')
@@ -12,6 +13,19 @@ appBE.use(cors());
 appBE.use(express.json());
 
 const mysql = require('mysql');
+const cookieParser = require('cookie-parser');
+
+const oneDay = 1000 * 60 * 60 * 24;
+appBE.use(sessions({
+    secret: 'secretkey',
+    saveUninitialized: true,
+    cookie: {maxAge:oneDay},
+    resave:false
+}));
+
+appBE.use(cookieParser());
+
+
 
 let thePosts = []
 
@@ -28,13 +42,16 @@ appBE.get('/', (req, res) => {
 
 appBE.post('/post', (req, res) => {
     res.send({
-        "message": "this is working",
+        "image": req.body.image,
         "name": req.body.name,
-        "comment": req.body.comment
+        "comment": req.body.comment,
+        "time": req.body.time
     })
     console.log(req.body)
+    let aImage = req.body.image;
     let aName = req.body.name;
-    let aComment = req.body.comment
+    let aComment = req.body.comment;
+    let aTime = req.body.time;
     
     const connection = mysql.createConnection({
         host: '127.0.0.1',
@@ -45,9 +62,11 @@ appBE.post('/post', (req, res) => {
     connection.connect(function(err) {
         if (err) throw err;
         console.log("Connected!");
+        let stringValueImage = "'" + aImage + "'"
         let stringValueName = "'" + aName + "'"
         let stringValueComment = "'" + aComment + "'"
-        let sql = "INSERT INTO userComment.comments(name, comment) VALUES (" + stringValueName + "," + stringValueComment + ")";
+        let stringValueTime = "'" + aTime + "'"
+        let sql = "INSERT INTO userComment.comments(image, username, comment, time) VALUES (" + stringValueImage + ", " + stringValueName + "," + stringValueComment + "," + stringValueTime + ")";
         connection.query(sql, function (err, result) {
           if (err) throw err;
           console.log("1 record inserted");
@@ -75,11 +94,11 @@ appBE.get('/get', (req, res) => {
           //console.log(result[0].name);
             
           result.forEach(element => {
-            console.log(element.name + ',' + element.comment)
-            let nextObj = {name:element.name, comment: element.comment}
+            let nextObj = {image: element.image, name: element.username, comment: element.comment, time: element.time}
+            console.log(nextObj)
             dbArray.push(nextObj)
           });
-
+          dbArray.reverse()
           res.json({
             dbArray
        })
@@ -93,17 +112,19 @@ appBE.get('/get', (req, res) => {
 
 //express session and cookie parser have not been used yet
 
+let session;
 
   appBE.post('/auth', function(req, res) {
 	// Capture the input fields
 	let username = req.body.username;
 	let password = req.body.password;
-   
+ 
+    
 	// Ensure the input fields exists and are not empty
     console.log(username + ', ' + password)
-    res.send({
-        "message": "this is working",
-    })
+    // res.send({
+    //     "message": "this is working",
+    // })
     
     if (username && password) {
 
@@ -125,14 +146,15 @@ appBE.get('/get', (req, res) => {
               if (err) throw err;
 
               if(result.length > 0) {
-                // req.session.loggedin = true;
-                // req.session.username = username;
+                req.session.loggedin = true;
+                req.session.username = username;
                 console.log(result)
                 console.log(req.session)
-                //res.redirect('/home')
+                res.send({loggedin: req.session.loggedin, username: req.session.username})
+                console.log('we made it to here')
               }else{
-                // res.send('Incorrrect un and/or pw')
                 console.log('wrong pw')
+                res.send({"message": "didn't get logged in"});
               }
               res.end();
             });
@@ -140,3 +162,54 @@ appBE.get('/get', (req, res) => {
 
 	} 
 });
+
+appBE.get('/auth', function(req, res) {
+    let logSession = req.session
+    res.json({
+        log:logSession
+    })
+})
+
+appBE.get('/endsession', function(req, res) {
+    req.session.destroy();
+    let nowSession = req.session
+    let nowBody = req.body
+    res.send({
+        body:nowBody,
+        loggedin: nowSession
+    })
+})
+
+
+appBE.post('/register', function(req, res) {
+  res.send({
+    "email": req.body.email,
+    "username": req.body.username,
+    "password": req.body.password
+  })
+  console.log(req.body)
+
+  let theEmail = req.body.email;
+  let theUserName = req.body.username;
+  let thePassword = req.body.password;
+
+  const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'password',
+    database: 'userComment'
+  });
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    let stringValueEmail = "'" + theEmail + "'"
+    let stringValueUserName = "'" + theUserName + "'"
+    let stringValuePassword = "'" + thePassword + "'"
+    let sql = "INSERT INTO userComment.accounts(username, password, email) VALUES (" + stringValueUserName + "," + stringValuePassword + "," + stringValueEmail + ")";
+    connection.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
+  });
+
+})
