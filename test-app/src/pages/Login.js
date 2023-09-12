@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 
 
+
 class Login extends Component{
     
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -34,20 +35,30 @@ class Login extends Component{
           }).then(function(response) {
               console.log(response)
               return response.json();
+          }).then((data) => {
+            console.log(data);
+            if (data.loggedin == true){
+                
+                //console.log(data.username)
+                let user = data.username;
+                localStorage.setItem(
+                    'name', user
+                )
+                window.location.href = "/"
+            }else{
+                console.log('wrong pw duder')
+            }
           });
 
-        // let showLI = `<li>name: ${this.state.name},  comment: ${this.state.comment}</li>`
-        // let theUL = window.document.querySelector(".theList")
-        // theUL.insertAdjacentHTML("afterend", showLI )
+       
         this.setState({
             username: "",
             password:""
         });
         
       }
-    
-    
-    
+
+
     render(){
         return(
             <div>
@@ -64,6 +75,7 @@ class Login extends Component{
                             <i className='fas fa-lock'></i>
                         </label>
                         <input className="password" type="password" value={this.state.password} name={this.state.password} onChange={this.handleChange} required/>
+                        <a href="/register" style={{color: "white"}}>Create a new account</a>
                         <input type='submit' value='submit' />
                     </form>
                 </div>
