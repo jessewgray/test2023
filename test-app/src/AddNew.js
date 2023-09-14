@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar'
 
+
+
 class AddNew extends Component{
 
     constructor(props) {
@@ -40,7 +42,7 @@ class AddNew extends Component{
                 user = 'anonymous'
             }
 
-            localStorage.getItem('name')
+            //localStorage.getItem('name')
 
 
             fetch('http://localhost:5000/post', {
@@ -53,23 +55,8 @@ class AddNew extends Component{
               return response.json();
           });
 
-        let showLI = (<div>
-          <Grid container wrap="nowrap" spacing={2}>
-              <Grid item>
-                  <Avatar alt="Remy Sharp" src='' />
-              </Grid>
-              <Grid justifyContent="left" item xs zeroMinWidth>
-                  <h4 style={{ margin: 0, textAlign: "left" }}>{this.state.someName}</h4>
-                  <p style={{ textAlign: "left" }}>{this.state.someComment}</p>
-                  <p style={{ textAlign: "left", color: "gray" }}>posted 1 minute ago</p>
-              </Grid>
-          </Grid>
-          <Divider variant="fullWidth" style={{ margin: "30px 0" }} /></div>)
-          
-        let last = window.document.getElementsByClassName('aComment').length - 1;
-        let getLast = window.document.getElementsByClassName('aComment')[last]
-        getLast.append(showLI)
-        console.log(showLI)
+
+      
         
         //empty inputs after submit
         this.setState({
@@ -79,24 +66,48 @@ class AddNew extends Component{
         
       }
 
-
+      
 
     render(){
-        return(
-            <div>
-                <p>this is the form section</p>
 
-                <form onSubmit={this.handleSubmit}>
-                    {/* <label>
-                    Name:
-                    <input className="inputName" type="text" value={this.state.name} name={this.state.name} onChange={this.handleChange} />
-                    </label> */}
-                    <label>
-                    Comment:
-                    <input className="inputComment" type="text" value={this.state.comment} name={this.state.comment} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+        const textAreaStyle={
+            'display':'block',
+            'margin': 'auto',
+            'height': '150px',
+            'width': '100%',
+            'padding': '5px'
+        }
+        const formWrap={
+            'width':'90%',
+            'margin':'auto'
+        }
+        const inputStyle = {
+            'background':'transparent',
+            'borderRadius': '5%',
+            'border': 'solid 1px black',
+            'padding': '5px 15px',
+            'fontFamily': 'Permanent Marker, cursive',
+            'margin': '15px 0px'
+        }
+
+        return(
+            <div className="container theBoxShadow">
+                <div className="formWrap" style={formWrap}>
+                    <form onSubmit={this.handleSubmit}>
+                        {/* <label>
+                        Name:
+                        <input className="inputName" type="text" value={this.state.name} name={this.state.name} onChange={this.handleChange} />
+                        </label> */}
+                        <label className='theLabel'>
+                        Add a Comment:
+                        </label>
+                        <textarea className="inputComment" type="text" style={textAreaStyle} value={this.state.comment} name={this.state.comment} onChange={this.handleChange} />
+                        <div className='submitWrap'>
+                            <input type="submit" style={inputStyle} value="Post" />
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
         )
     }

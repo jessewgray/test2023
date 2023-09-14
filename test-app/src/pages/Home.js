@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 
 import AddNew from '../AddNew.js'
 import DisplayInfo from '../DisplayInfo';
-import Header from './Header.js'
-
+import HeaderWrap from '../features/HeaderWrap.js';
+import Search from '../Search.js'
 
 
 
@@ -11,9 +11,9 @@ class Home extends Component {
     render(){ 
         return(
             <div>
-                <Header/>
-                <p>this is the home page</p>
+                <HeaderWrap/>
                 <AddNew />
+                <Search />
                 <DisplayInfo />
             </div>
         )

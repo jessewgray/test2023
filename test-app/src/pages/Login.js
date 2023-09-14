@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 
-
 class Login extends Component{
     
     constructor(props) {
@@ -62,8 +61,6 @@ class Login extends Component{
     render(){
         return(
             <div>
-                <p>this is the login page</p>
-
                 <div className='login' style={{ backgroundColor: "#435165"}}>
                     <h1>Login</h1>
                     <form onSubmit={this.handleSubmit}>

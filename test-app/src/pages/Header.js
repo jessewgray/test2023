@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Search from '../Search';
+
 
 import Button from '@mui/material/Button'
 
@@ -32,13 +32,27 @@ export default function Header(){
             if(loggedInUser == null){
                 window.location.href = '/login'
             }
+        const styleButton = {
+            'margin': '0px 5px',
+            'color': 'black',
+            'borderColor': '#00ff00',
+            'color': '#00ff00',
+            'textShadow': '1px 2px 2px black',
+            'fontFamily': 'Permanent Marker, cursive'
+        }
+        const welcome = {
+            'fontFamily': 'Permanent Marker, cursive'
+        }
 
         return(
             <div>
-                <Button variant="outlined" onClick={letsLogin}>Login</Button>
-                <Button variant="outlined" onClick={letsLogout}>Logout</Button>
-                <Search />
+                <div style={{'marginBottom':'20px'}}>
+                    <Button variant="outlined" style={styleButton} onClick={letsLogin}>Login</Button>
+                    <Button variant="outlined" style={styleButton} onClick={letsLogout}>Logout</Button>
+                </div>
+                <div>
+                    <p style={welcome}>Welcome back, {localStorage.getItem('name')}</p>
+                </div>
             </div>
         )
     }
-

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 
+
 class Register extends Component{
 
     constructor(props) {
@@ -66,7 +67,6 @@ class Register extends Component{
     render(){
         return(
             <div>
-                <p>this is the registration page</p>
                 <div className='login' style={{ backgroundColor: "#435165"}}>
                     <form onSubmit={this.handleSubmit}>
                             <label htmlFor="email">
