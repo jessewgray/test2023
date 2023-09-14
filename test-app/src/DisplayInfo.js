@@ -74,7 +74,7 @@ function DisplayInfo(){
               
         
         return(
-            <div className='container'>                
+            <div className='container' style={{'border': 'solid'}}>                
     
                 <Paper style={{ padding: "40px 20px", maxWidth:'90%', margin:'auto' }} className="thePaper">
                     {comments}
