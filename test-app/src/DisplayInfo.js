@@ -38,6 +38,7 @@ function DisplayInfo(){
                     .catch(error => console.error(error));    
            }()
 
+           
        
           
             // const newNames = [{name:'jesse', comment:'this is jesses comment'}, {name:'holly', comment:'this is hollys comment'}]
