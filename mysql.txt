@@ -1,0 +1,10 @@
+freemysqlhosting.net
+jwgray2@gmail.com
+mysqlPassword#1
+
+
+Server: sql9.freemysqlhosting.net
+Name: sql9646444
+Username: sql9646444
+Password: tWF67lbQMf
+Port number: 3306

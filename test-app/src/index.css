@@ -1,0 +1,26 @@
+.container{
+    margin-bottom:40px;
+}
+.theLabel{
+    font-family: "Permanent Marker", cursive;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.submitWrap{
+    text-align: right;
+}
+.theBoxShadow{
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+}
+
+textarea:focus-visible{
+    outline-color:  #00ff00 !important;
+}
+
+input:focus-visible{
+    outline-color: #ffb3e1;
+}
+
+.css-1cfjp91-MuiGrid-root>.MuiGrid-item{
+    padding-right:16px;
+}

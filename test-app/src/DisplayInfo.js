@@ -30,7 +30,7 @@ function DisplayInfo(){
             fetch('http://localhost:5000/get')
                     .then(response => response.json())
                     .then((data) => {
-                        console.log(data.dbArray)
+                       // console.log(data.dbArray)
                         data.dbArray.forEach((element) => {
                            stArray.push({image: element.image, name:element.name, comment:element.comment, time: element.time})
                     })
@@ -54,33 +54,28 @@ function DisplayInfo(){
                             <Avatar alt="Remy Sharp" src='' />
                         </Grid>
                         <Grid justifyContent="left" item xs zeroMinWidth>
-                            <h4 style={{ margin: 0, textAlign: "left" }}>{nextObj.name}</h4>
-                            <p style={{ textAlign: "left" }}>{nextObj.comment}</p>
+                            <h4 style={{ margin: 0, textAlign: 'left', 'fontFamily': 'Permanent Marker, cursive'}}>{nextObj.name}</h4>
                             <p style={{ textAlign: "left", color: "gray" }}>{nextObj.time}</p>
+                            <p style={{ textAlign: "left" }}>{nextObj.comment}</p>
                         </Grid>
                     </Grid>
                     <Divider variant="fullWidth" style={{ margin: "30px 0" }} /></div>
                     )
                 ))
                 setComments(showNewComments)
-                console.log(showNewComments)
+                //console.log(showNewComments)
             }
 
             useEffect(() => {
                 const timer = setTimeout(() => waitList(), 1000);
                 return () => clearTimeout(timer);
               }, []);
-            
-
+              
         
         return(
-            <div>                
-                <p>this is the return from the api</p>
-                <div className="showData">
-                    <ul className="theList"></ul>
-                </div>
-
-                <Paper style={{ padding: "40px 20px", maxWidth:'80%', margin:'auto' }} className="thePaper">
+            <div className='container'>                
+    
+                <Paper style={{ padding: "40px 20px", maxWidth:'90%', margin:'auto' }} className="thePaper">
                     {comments}
                 </Paper>
           
