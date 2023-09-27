@@ -47,7 +47,8 @@ class Login extends Component{
                 )
                 window.location.href = "/"
             }else{
-                console.log('wrong pw duder')
+                alert('wrong password or username');
+
             }
           });
 
@@ -63,7 +64,7 @@ class Login extends Component{
     render(){
         return(
             <div>
-                <div className='login' style={{ backgroundColor: "#435165"}}>
+                <div className='login' style={{ backgroundColor: "#ffb3e1"}}>
                     <h1>Login</h1>
                     <form onSubmit={this.handleSubmit}>
                         <label htmlFor="username">
@@ -74,7 +75,7 @@ class Login extends Component{
                             <i className='fas fa-lock'></i>
                         </label>
                         <input className="password" type="password" value={this.state.password} name={this.state.password} onChange={this.handleChange} required/>
-                        <a href="/register" style={{color: "white"}}>Create a new account</a>
+                        <a href="/register" style={{color: "#000000"}}>Create a new account</a>
                         <input type='submit' value='submit' />
                     </form>
                 </div>

@@ -1,5 +1,3 @@
-import React, {Component} from 'react';
-
 
 import Button from '@mui/material/Button'
 
@@ -13,7 +11,7 @@ export default function Header(){
             window.location.href = '/login'
         }
         const letsLogout = function(){
-            console.log("lets logout in mofo");
+            console.log("you're logged out");
             
             //fetch('http://localhost:8080/endsession')
             fetch('https://backend-pigeon.azurewebsites.net/endsession')
@@ -23,6 +21,8 @@ export default function Header(){
                 if(Object.keys(data.body).length === 0){
                     localStorage.removeItem('name')
                 }
+            }).then(function(){
+                window.location.reload();
             });
 
 

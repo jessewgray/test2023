@@ -1,10 +1,5 @@
 import React, {Component} from 'react'
 
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
-import Avatar from '@mui/material/Avatar'
-
 
 
 class AddNew extends Component{
