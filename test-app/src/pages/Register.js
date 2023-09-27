@@ -68,7 +68,7 @@ class Register extends Component{
     render(){
         return(
             <div>
-                <div className='login' style={{ backgroundColor: "#435165"}}>
+                <div className='login' style={{ backgroundColor: "#ffb3e1"}}>
                     <form onSubmit={this.handleSubmit}>
                             <label htmlFor="email">
                                 <i className='fas fa-envelope'></i>

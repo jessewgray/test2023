@@ -12,18 +12,6 @@ function DisplayInfo(){
 
     const [comments, setComments] = useState('');
 
-    
-        const styles = {
-            ma:{
-                margin: 'auto'
-            },
-            bg: {
-                background: 'white',
-                color:'black'
-              }
-          };
-
-
          
         let stArray = []
         let getData = function(){
