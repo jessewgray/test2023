@@ -19,11 +19,14 @@ class AddNew extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
-      
 
+      
+    
       handleChange(event) {
         // let someName = document.querySelector('.inputName').value;
         let someComment = document.querySelector('.inputComment').value;
+
+    
         this.setState({
             // name: someName,
             comment: someComment
@@ -42,17 +45,28 @@ class AddNew extends Component{
                 user = 'anonymous'
             }
 
+            let escapeRegExp =  (string) => {
+                return string.replace(/[.*+?^'${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+            }
+
+            let escapedComment = escapeRegExp(this.state.comment)
+          
+
+
             //localStorage.getItem('name')
+            
 
-
-            fetch('http://localhost:5000/post', {
+            //fetch('http://localhost:8080/post', {
+            fetch('https://backend-pigeon.azurewebsites.net/post', {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
               // We convert the React state to JSON and send it as the POST body
-              body: JSON.stringify({"image": "no image", "name": user, "comment": this.state.comment, "time": nowString})
+              body: JSON.stringify({"name": user, "comment": escapedComment, "time": nowString})
           }).then(function(response) {
               //console.log(response)
               return response.json();
+          }).then(function(){
+            window.location.reload();
           });
 
 
@@ -89,6 +103,7 @@ class AddNew extends Component{
             'fontFamily': 'Permanent Marker, cursive',
             'margin': '15px 0px'
         }
+
 
         return(
             <div className="container theBoxShadow">

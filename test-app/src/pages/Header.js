@@ -14,7 +14,9 @@ export default function Header(){
         }
         const letsLogout = function(){
             console.log("lets logout in mofo");
-            fetch('http://localhost:5000/endsession')
+            
+            //fetch('http://localhost:8080/endsession')
+            fetch('https://backend-pigeon.azurewebsites.net/endsession')
             .then(response => response.json())
             .then((data) => {
                 console.log(data.body)

@@ -26,7 +26,9 @@ class Login extends Component{
     
       handleSubmit(event) {
         event.preventDefault();
-            fetch('http://localhost:5000/auth', {
+       
+        //fetch('http://localhost:8080/auth', {
+        fetch(' https://backend-pigeon.azurewebsites.net/auth', {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
               // We convert the React state to JSON and send it as the POST body
