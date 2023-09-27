@@ -27,7 +27,9 @@ function DisplayInfo(){
          
         let stArray = []
         let getData = function(){
-            fetch('http://localhost:5000/get')
+           
+            //fetch('http://localhost:8080/get')
+            fetch('https://backend-pigeon.azurewebsites.net/get')
                     .then(response => response.json())
                     .then((data) => {
                        // console.log(data.dbArray)
@@ -38,21 +40,13 @@ function DisplayInfo(){
                     .catch(error => console.error(error));    
            }()
 
-           
-       
-          
-            // const newNames = [{name:'jesse', comment:'this is jesses comment'}, {name:'holly', comment:'this is hollys comment'}]
-            // const showComments = newNames.map((obj) => (
-            //     (<SnackbarContent key={obj.name.toString()} style={styles.bg} message={obj.name + obj.comment}/>)
-            // ))
-               
-
+            
             const waitList = () => {
                 const showNewComments = stArray.map((nextObj, i) => (
-                    (<div className="aComment">
+                    (<div className="aComment" key={i}>
                     <Grid container wrap="nowrap" spacing={2} >
                         <Grid item>
-                            <Avatar alt="Remy Sharp" src='' />
+                            <Avatar alt="" src='' />
                         </Grid>
                         <Grid justifyContent="left" item xs zeroMinWidth>
                             <h4 style={{ margin: 0, textAlign: 'left', 'fontFamily': 'Permanent Marker, cursive'}}>{nextObj.name}</h4>
@@ -74,7 +68,7 @@ function DisplayInfo(){
               
         
         return(
-            <div className='container' style={{'border': 'solid'}}>                
+            <div className='container'>                
     
                 <Paper style={{ padding: "40px 20px", maxWidth:'90%', margin:'auto' }} className="thePaper">
                     {comments}

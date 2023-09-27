@@ -9,7 +9,8 @@ export default function Search(){
    
         
         useEffect(() => {
-            fetch('http://localhost:5000/get')
+            //fetch('http://localhost:8080/get')
+            fetch('https://backend-pigeon.azurewebsites.net/get')
                     .then(response => response.json())
                     .then((data) => {
                         console.log(data.dbArray)

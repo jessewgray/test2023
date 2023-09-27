@@ -34,7 +34,8 @@ class Register extends Component{
         
          if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email))
           {
-            fetch('http://localhost:5000/register', {
+        //fetch('http://localhost:8080/register', {
+        fetch('https://backend-pigeon.azurewebsites.net/register', {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
               // We convert the React state to JSON and send it as the POST body
